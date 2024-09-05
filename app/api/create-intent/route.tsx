@@ -1,20 +1,18 @@
-// import { Stripe } from "@stripe/stripe-js";
-import { NextResponse } from "next/server"
-// require 'stripe';
-// @ts-ignore
-import Stripe from "stripe";
+ import { NextResponse } from "next/server"
+//require 'stripe';
+import  Stripe  from 'stripe';
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!,{
     typescript:true,
-    apiVersion:"2023-08-16"
+    apiVersion:"2024-06-20"
 })
 export async function POST(request:any){
         const data:any= await request.json();
         const amount= data.amount;
 
         try{
-                const paymentIntent = await Stripe.paymentIntents.create({
+                const paymentIntent = await stripe.paymentIntents.create({
                     amount:Number(amount),
                     currency : 'USD'
                 })
